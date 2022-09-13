@@ -1,0 +1,41 @@
+{% extends "dashboard_base.html" %}
+{% block dashboard %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 mx-auto py-4">
+            <div class="card">
+                <div class="card-header">
+                    <h1>Detaylar</h1>
+                </div>
+                <div class="card-body">
+                    <table class="table table-bordered">
+                        <tbody>
+                            <tr>
+                                <th>ID</th>
+                                <td>{{user.id}}</td>
+                            </tr>
+                            <tr>
+                                <th>Kullanici adi</th>
+                                <td>{{user.username}}</td>
+                            </tr>
+                            <tr>
+                                <th>Ad Soyad</th>
+                                <td>{{user.first_name}} {{user.last_name}}</td>
+                            </tr>
+                            <tr>
+                                <th>Son giris</th>
+                                <td>{{user.last_login}}</td>
+                            </tr>
+                            <tr>
+                                <th>Katilma tarihi</th>
+                                <td>{{user.date_joined}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

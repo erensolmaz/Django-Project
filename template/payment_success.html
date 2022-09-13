@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block myblock %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-6 mx-auto p-2 my-3 text-center"  style="box-shadow:0px 0px 10px gray;">
+            <img src="{% static 'images/success.gif' %}" height="300" width="300">
+            <h1 class="alert alert-success">Odeme basarili</h1>
+            <div class="my-1">
+                <a href="{% url 'cart' %}" class="btn btn-success">Devam et</a>
+                <a href="{% url 'cust_dashboard' %}" class="btn btn-primary">Islem merkezine don</a>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+{% load static %}
+{% block head %}
+<style>
+    h1{
+        font-family: cursive;color:red;
+    }
+    .bg{
+        height:200px;background:url("/static/images/nature.jpg");
+    }
+    .myimg{
+        height:300px;
+    }
+    .box:hover{
+        height:100%;width:100%;background:rgba(0,0,0,0.5);color:white;
+    }
+</style>
+{% endblock %}
+{% block myblock %}
+
+<div class="container-fluid">
+    <div class="row py-5 " style="background:url('/static/images/c2.jpg');background-size:100% 100%">
+        <div class="col-md-8 mx-auto my-5">
+        <form action="{% url 'all_products' %}" >
+            <div class="container">
+                <div class="row">
+                
+                    <div class="col-md-5">
+                        <input type="text" name="qry" class="form-control" placeholder="Urun ara...">
+                    </div>
+                    {% comment %} <div class="col-md-5">
+                        <input type="text" name="price" class="form-control" placeholder="Urun fiyatina gore azalan...">
+                    </div> {% endcomment %}
+                    <div class="col-md-2">
+                        <button type="submit" class="btn btn-success">Ara</button>
+                    </div>
+                
+                </div>
+            </div>
+            </form>
+        </div>
+    </div>
+    <!-- <h1>HELLO THERE</h1> -->
+    <div class="row">
+     <div class="col-md-12 text-center">
+        <h1>Urunler ({{category|length}})</h1>
+     </div>
+     {% for c in category %}
+        <div class="col-md-4 p-4 text-center">
+            <div style="box-shadow:0px 0px 10px black; background:url('/media/{{c.cover_pic}}');background-size:100% 100%;" class="myimg">
+                <!-- <img src="/media/{{c.cover_pic}}" height="200"> -->
+                <a href="{% url 'all_products' %}?cat={{c.id}}">
+                    <div  class="box" style="height:300px;">
+                        <h2>{{c.cat_name}}</h2>
+                        <p>{{c.description}}</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    {% endfor %}
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <h2 class="text-center">Eski mesajlar</h2>
+            <h4 class="text-center"><em>Toplam: {{messages|length}}</em></h4>
+            <table class="table table-bordered table-striped table-hover">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>Isim</th>
+                        <th>Numara</th>
+                        <th>Islem</th>
+                        <th>Mesaj</th>
+                        <th>Tarih</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for msg in messages %}
+                        <tr>
+                            <td>{{msg.id}}</td>
+                            <td>{{msg.name}}</td>
+                            <td>{{msg.contact_number}}</td>
+                            <td>{{msg.subject}}</td>
+                            <td>{{msg.message}}</td>
+                            <td>{{msg.added_on}}</td>
+                        </tr>
+                    {% endfor%}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% if status %}
+    <script>
+        alert("{{status}}");
+        window.location="/"
+    </script>
+{% endif %}
+{% endblock %}

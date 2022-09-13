@@ -1,0 +1,62 @@
+{% extends "dashboard_base.html" %}
+{% block dashboard %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12 mt-2">
+            <h2 class="alert alert-primary">Islem merkezi &gt; My Products ({{products|length}})</h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Urun ID</th>
+                        <th>Urun Resim</th>
+                        <th>Urun Adi</th>
+                        <th>Satici adi</th>
+                        <th>Urun islemi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for p in products %}
+                        <tr>
+                            <td>{{p.id}}</td>
+                            <td><img src="/media/{{p.product_image}}" style="height:50px;width:80px;"></td>
+                            <td>{{p.product_name}}</td>
+                            <td>{{p.seller.first_name}} {{p.seller.last_name}}</td>
+                            <td>
+                                <button class="btn btn-success" data-toggle="modal" data-target="#m{{p.id}}"><i class="fa fa-eye"></i> incele</button>
+                                <a href="{% url 'update_product' %}?pid={{p.id}}" class="btn btn-primary"><i class="fa fa-edit"></i> Duzenle</a>
+                                <a href="{% url 'delete_product' %}?pid={{p.id}}" class="btn btn-danger"><i class="fa fa-trash"></i> Kaldir</a>
+                            </td>
+                        </tr>
+
+                        <div class="modal fade" id="m{{p.id}}">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h4>Urun detaylari</h4>
+                                        <button class="close" data-dismiss="modal">&times;</button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <img src="/media/{{p.product_image}}" alt="" height="200" width="100%">
+                                        <h2>
+                                            <a href="{% url 'single_product' %}?pid={{p.id}}">{{p.product_name}}</a>
+                                        </h2>
+                                        <p>({{p.product_category.cat_name}})</p>
+                                        <p style="font-size:30px;">
+                                            <del>&#8377; {{p.product_price}}</del>
+                                            <strong> &#8377;{{p.sale_price}}</strong>
+                                        </p>
+                                        <p>{{p.details}}</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <a href="{% url 'single_product' %}?pid={{p.id}}" class="btn btn-success">Incele</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

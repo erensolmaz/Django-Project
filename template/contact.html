@@ -1,0 +1,74 @@
+
+{% extends "base.html"%}
+{% load static %}
+{% block myblock %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12 bg-primary text-center py-5 text-light">
+            <h1>Iletisim alani</h1>
+        </div>
+        <div class="col-md-6">
+            <iframe src="https://www.google.com/mars/#" width="100%" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+        </div>
+        <div class="col-md-6">
+            <form action="" method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label>Isim</label>
+                    <input type="text" class="form-control" name="name" placeholder="Adi gir...">
+                </div>
+                <div class="form-group">
+                    <label>Numara</label>
+                    <input type="text" class="form-control" name="contact" placeholder="Numara gir...">
+                </div>
+                <div class="form-group">
+                    <label>Konu</label>
+                    <input type="text" class="form-control" name="subject" placeholder="Konu gir...">
+                </div>
+                <div class="form-group">
+                    <label>Mesaj</label>
+                    <textarea class="form-control" rows="5" name="Mesaj gir"></textarea>
+                </div>
+                <div class="form-group">
+                    <input type="submit" class="btn btn-success" value="Gonder">
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <h2 class="text-center">Geri bildirimler</h2>
+            <h4 class="text-center"><em>Toplam: {{messages|length}}</em></h4>
+            <table class="table table-bordered table-striped table-hover">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>Isim</th>
+                        <th>Numara</th>
+                        <th>Konu</th>
+                        <th>Mesaj</th>
+                        <th>Tarih</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for msg in messages %}
+                        <tr>
+                            <td>{{msg.id}}</td>
+                            <td>{{msg.name}}</td>
+                            <td>{{msg.contact_number}}</td>
+                            <td>{{msg.subject}}</td>
+                            <td>{{msg.message}}</td>
+                            <td>{{msg.added_on}}</td>
+                        </tr>
+                    {% endfor%}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% if status %}
+<script>
+    alert("{{status}}");
+</script>
+{% endif %}
+{% endblock%}

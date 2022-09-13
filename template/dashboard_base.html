@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% load static %}
+{% block myblock %}
+{% if user.is_superuser %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 mt-4">
+                <div class="jumbotron">
+                    <h1>Buraya giris yasak {{user.username}} uzgunuz.</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+{% else %}
+<div class="container-fluid">
+    <div class="row">
+        <!-- left side menu -->
+        <div class="col-md-2 bg-dark py-5">
+            <nav class="navbar navbar-dark">
+                <a href="" class="navbar-brand">
+                <div class="text-center">
+                    {% if data.profile_pic %}
+                    <img src="/media/{{data.profile_pic}}" style="height:50px;width:50px;border-radius:50%">
+                    {% else %}
+                    <img src="{% static 'images/user.png' %}" style="height:50px;width:50px;border-radius:50%">
+                    {% endif %}
+                </div>
+                    <p>{{user.username}}</p>
+                </a>
+                
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a href="{% url 'cust_dashboard'%}" class="nav-link">Profil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'edit_profile'%}" class="nav-link">Profili duzenle</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'change_password' %}" class="nav-link">Sifre degistir</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'cart' %}" class="nav-link">Sepetim</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'order_history' %}" class="nav-link">Satin alma gecmisi</a>
+                    </li>
+                    {% if user.is_staff %}
+                    <li class="nav-item">
+                        <a href="{% url 'add_product_view' %}" class="nav-link">Sepete ekle</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'my_products' %}" class="nav-link">Sepetim</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'sendemail' %}" class="nav-link">Mail gonder</a>
+                    </li>
+                   
+                    {% endif %}
+                    <li class="nav-item">
+                        <a href="{% url 'user_logout' %}" class="nav-link">Cikis yap</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+        <!-- right side menu -->
+        <div class="col-md-10">
+            {% block dashboard %}
+
+            {% endblock %}
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock %}

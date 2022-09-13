@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% load static %}
+{% block head %}
+<style>
+    th{
+    width:30%;
+}
+.hover:hover{
+    box-shadow:0px 0px 10px black;padding:30px;
+}
+</style>
+{% endblock %}
+{% block myblock %}
+    <div class="container-fluid" style="background:url('/static/images/c2.jpg');background-size:100% 100%;">
+        <div class="row py-5" style="background:rgba(0,0,0,0.5)">
+            <div class="col-md-12 py-5 my-5 text-light text-center font-weight-bold text-uppercase">
+                {%if abcd %}
+                <h1>total ({{products|length}}) products found</h1>
+                {% else %}
+                <h1>Urunler ({{products|length}})</h1>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row py-4">
+            {% for i in products %}
+                <div class="col-md-4 p-5">
+                    <div style="border:1px solid gray" class="p-1 hover">
+                        <img src="/media/{{i.product_image}}" height="200" width="100%">
+                        <h3 style="color:orange">
+                        <a href="{% url 'single_product' %}?pid={{i.id}}">{{i.product_name}}</a>
+                        </h3>
+                        <h4>
+                            <span><del>&#8377; {{i.product_price}}</del></span> 
+                            <span>&#8377; {{i.sale_price}}</span>
+                        </h4>
+                        <h5><strong>{{i.product_category.cat_name}}</strong></h5>
+                        <form action="{% url 'cart' %}" method="post">
+                            {% csrf_token %}
+                            <input type="hidden" value="{{i.id}}" name="pid">
+                            <input type="hidden" value="1" name="qty">
+                            <button type="submit" class="btn btn-success btn-block">
+                                <i class="fa fa-shopping-cart"></i>
+                                Sepete Ekle
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

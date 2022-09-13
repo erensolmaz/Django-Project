@@ -1,0 +1,41 @@
+{% extends "dashboard_base.html" %}
+{% load static %}
+{% block head %}
+<style>
+    .bg-img{
+    background:url("/static/images/cover.jpg");
+}
+</style>
+{% endblock %}
+{% block dashboard %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12 bg-img py-5 text-center text-light px-0">
+            <h1>Islem merkezi &gt; Mail gonder</h1>
+        </div>
+        <div class="col-md-6  p-3 bg-light my-5 shadow shadow-lg mx-auto">
+            {% if status %}
+                <div class="alert {{cls}}">{{status}}</div>
+            {% endif %}
+            <form action="" method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="">Gonderilecek</label>
+                    <input type="text" class="form-control" placeholder="Gonderilecek" name="to">
+                </div>
+                <div class="form-group">
+                    <label for="">Konu</label>
+                    <input type="text" class="form-control" placeholder="Konu" name="sub">
+                </div>
+                <div class="form-group">
+                    <label for="">Mesaj</label>
+                    <textarea name="msz"  rows="5" placeholder="Mesajinizi girin" class="form-control"></textarea>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Mail gonder" class="btn btn-outline-primary rounded-pill">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
