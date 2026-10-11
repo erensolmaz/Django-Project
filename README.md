@@ -1,13 +1,40 @@
-# Django-Project
+<div align="center">
 
-## Python Django E-Commerce Web Site (Django ile pyhton ürün satış sitesi)
+# 🛒 Django E-Commerce Website
 
-### Features:
-> Database
+**A product-selling website built with Python Django (Django ile Python ürün satış sitesi)**
 
-> Cart
+![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white) ![Django](https://img.shields.io/badge/Django-092E20?style=for-the-badge&logo=django&logoColor=white) ![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white) ![Bootstrap](https://img.shields.io/badge/Bootstrap-7952B3?style=for-the-badge&logo=bootstrap&logoColor=white) ![SQLite](https://img.shields.io/badge/SQLite-003B57?style=for-the-badge&logo=sqlite&logoColor=white)
 
-> Products
+</div>
+
+---
+
+## ✨ Features
+
+- User registration, login and profile
+- Product catalogue with images and prices
+- Shopping cart and orders
+- Contact form
+- Admin panel for products & categories
+- SQLite database
+
+## 🚀 Getting Started
+
+```bash
+git clone https://github.com/erensolmaz/Django-Project.git
+cd Django-Project
+pip install django pillow
+python manage.py migrate
+python manage.py runserver
+```
+Open `http://127.0.0.1:8000/`. For the admin panel run `python manage.py createsuperuser`.
+
+## 🗄️ Data Models
+
+`Category` · `add_product` · `cart` · `order` · `register_table` (user profile) · `Contact_Us` · `Student`
+
+## 📖 Detailed Setup Guide (Turkish, Visual Studio Code)
 
 ## Install Project
 
@@ -140,4 +167,10 @@ Manage.py> django projemizi çalıştıracağımız dosya
  
 ![Picture19](https://user-images.githubusercontent.com/40443383/190002459-04a36214-23f3-4011-9471-3c6e0762600a.png)
 
+---
 
+<div align="center">
+
+Made by [Eren Solmaz](https://github.com/erensolmaz) · [LinkedIn](https://linkedin.com/in/noiren)
+
+</div>
